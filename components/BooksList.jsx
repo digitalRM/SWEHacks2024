@@ -51,10 +51,11 @@ const AllBooks = [
 
     
 
-export default function BooksList() {
+export default function BooksList({ impediments }) {
   return (
     <div className="">
-      <h1 className="text-4xl font-semibold tracking-tight mb-8">Featured Books</h1>
+      <h1 className="text-4xl font-semibold tracking-tight mb-2">Featured Books</h1>
+      <p className="text-lg text-neutral-600 italic mb-8">Targeting the following sounds: {impediments.map((impediment) => impediment.name).join(", ")}</p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
         {FeaturedBooks.map((book) => (
           <div key={book.key} className="flex flex-row ustify-center w-full h-full p-8 bg-white dark:bg-neutral-800 border border-neutral-200 rounded-xl shadow-sm">
