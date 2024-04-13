@@ -4,20 +4,50 @@ import { Book } from "lucide-react"
 const FeaturedBooks = [
   {
     title: 'Curious George & The Firefighters',
-    readTime: '5 minutes',
+    readTime: 'A 5 minute read',
     image: '/51ivdcJn6PL.jpg',
     desc: 'There is a fire! Can George help the firefighters and save the day?',
     key: 0
   },
   {
     title: 'Curious George & The Library',
-    readTime: '8 minutes',
+    readTime: 'A 8 minute read',
     image: '/georgeLibrary.webp',
     desc: 'George loves books! Can he help the librarian and save the library?',
     key: 1
   },
 ]
 
+const AllBooks = [
+  {
+    title: 'Curious George & The Firefighters',
+    readTime: 'A 5 minute read',
+    image: '/51ivdcJn6PL.jpg',
+    desc: 'There is a fire! Can George help the firefighters and save the day?',
+    key: 0
+  },
+  {
+    title: 'Curious George & The Library',
+    readTime: 'A 8 minute read',
+    image: '/georgeLibrary.webp',
+    desc: 'George loves books! Can he help the librarian and save the library?',
+    key: 1
+  },
+  {
+    title: 'Curious George & The Bank',
+    readTime: 'A 10 minute read',
+    image: '/georgeBank.webp',
+    desc: 'George is curious about money! Can he help the bank and save the day?',
+    key: 2
+  },
+  {
+    title: 'Curious George & The Hospital',
+    readTime: 'A 7 minute read',
+    image: '/georgeHospital.webp',
+    desc: 'George is curious about doctors! Can he help the hospital and save the day?',
+    key: 3
+  }
+]
 
     
 
@@ -29,24 +59,17 @@ export default function BooksList() {
         {FeaturedBooks.map((book) => (
           <div key={book.key} className="flex flex-row ustify-center w-full h-full p-8 bg-white dark:bg-neutral-800 border border-neutral-200 rounded-xl shadow-sm">
             <div className="w-full h-full justify-between flex flex-col">
-              <h2 className="text-2xl font-semibold my-2 mb-2 tracking-tight">{book.title}</h2>
+              <div>
+                <h2 className="text-2xl font-semibold my-2 mb-2 tracking-tight">{book.title}</h2>
+                <p className="text-lg text-neutral-600">{book.readTime}</p>
+              </div>
               <p className="text-lg mt-2">{book.desc}</p>
             </div>
-            <img src={book.image} alt={book.title} className="w-1/2 object-cover rounded-md bg-center" />
+            <img src={book.image} alt={book.title} className="w-1/2 object-contain rounded-md bg-center" />
           </div>
         ))}
-        <button className="w-full bg-white border-dashed dark:bg-neutral-800 border border-neutral-200 rounded-xl shadow-sm">
-          <div className="text-center flex flex-col">
-            <div className="relative h-[64px] w-[48px] mx-auto">
-              <Book size={48} fill="#f3f4f6" className="text-neutral-400 absolute dark:text-neutral-500 mx-auto" />
-              <Book size={48} fill="#f3f4f6" className="text-neutral-400 absolute ml-4 mt-4 rotate-12 dark:text-neutral-500 mx-auto" />
-            </div>
-            <h3 className="mt-2 text-sm font-semibold text-neutral-900">Add a new book</h3>
-            <p className="mt-1 text-sm text-neutral-500">Add a new book to your library</p>
-          </div>
-        </button>
-
       </div>
+
     </div>
   )
 }
