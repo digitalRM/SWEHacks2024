@@ -22,9 +22,8 @@ function WordPlayer({ word }) {
     };
 
     return (
-        <div onClick={playAudio} style={{ cursor: 'pointer' }}>
-            {word}
-            {audioUrl && <p>Now playing: {word}</p>}
+        <div onClick={playAudio} style={{ cursor: 'pointer', "display":"inline" }}>
+            {word + " "} 
         </div>
     );
 }
