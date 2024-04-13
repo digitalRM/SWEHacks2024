@@ -49,13 +49,47 @@ const AllBooks = [
   }
 ]
 
+const listOfImpediments = [
+  {
+    name: "Ss",
+    key: 0,
+    description: "The 's' sound is hard to pronounce."
+  },
+  {
+    name: "Rr",
+    key: 1,
+    description: "The 'r' sound is hard to pronounce."
+  },
+  {
+    name: "Th",
+    key: 2,
+    description: "The 'th' sound is hard to pronounce."
+  },
+  {
+    name: "Zz",
+    key: 3,
+    description: "The 'z' sound is hard to pronounce."
+  },
+]
+
+
     
 
 export default function BooksList({ impediments }) {
   return (
     <div className="">
+      {/* <div className="flex flex-row justify-between h-7">
+        <h1 className="text-4xl font-semibold tracking-tight mb-2">Featured Books</h1>
+        {listOfImpediments.map((impediment) => (
+          <div key={impediment.key} className="flex sm:flex-row items-center justify-center w-24 mt-4">
+            <button className={`mr-2 mt-1 text-center font-semibold text-5xl focus:ring-neutral-500 focus:border-neutral-500 block w-full h-full shadow-sm border-2 rounded-md md:aspect-square bg-neutral-50 dark:hover:bg-bray-800 dark:bg-neutral-700 hover:bg-neutral-100 dark:border-neutral-600 dark:hover:border-neutral-500 dark:hover:bg-neutral-600 transition border-neutral-300 border-dashed aspect-square ${impediment[impediment.key] ? "border-orange-500 dark:border-orange-500 bg-orange-500 dark:bg-orange-500 text-black hover:bg-orange-400  hover:dark:bg-orange-400 hover:border-orange-500 hover:dark:border-orange-500 focus:ring-orange-600 focus:border-orange-600" : ""}`}>
+              {impediment.name}
+            </button>
+          </div>
+        ))}
+      </div> */}
       <h1 className="text-4xl font-semibold tracking-tight mb-2">Featured Books</h1>
-      <p className="text-lg text-neutral-600 italic mb-8">Targeting the following sounds: {impediments.map((impediment) => impediment.name).join(", ")}</p>
+      {/* <p className="text-lg text-neutral-600 italic mb-8">Targeting the following sounds: {impediments.map((impediment) => impediment.name).join(", ")}</p> */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mt-4">
         {FeaturedBooks.map((book) => (
           <div key={book.key} className="flex flex-row ustify-center w-full h-full p-8 bg-white dark:bg-neutral-800 border border-neutral-200 rounded-xl shadow-sm">
