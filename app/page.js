@@ -1,13 +1,39 @@
-import Image from "next/image";
-import WordPlayer from "./WordPlayer";
-import Paragraph from "./Paragraph";
+'use client';
+import BooksList from "@/components/BooksList";
+import ImpedimentsOnboarding from "@/components/ImpedimentsOnboarding";
+import { useState } from "react";
+
+import { useCookies } from 'next-client-cookies';
+
 
 export default function Home() {
-  
+  const cookies = useCookies();
+
+
+
+
+  const [impediments, setImpediments] = useState([cookies.get("impediments")]);
+
+
+
+
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <WordPlayer word="snake"/>
-      <Paragraph text="Once upon a time, there was a remarkable giraffe named Ginger. Ginger resided in Kenya, a vibrant country in Africa. Like every giraffe, Ginger boasted a long neck and towering legs. Her great height allowed her to easily browse for food from the uppermost branches of the trees in the sprawling savannah. This savannah in Africa is a vast region adorned with abundant grass and scattered trees. It is often referred to as the grasslands. Other creatures, like zebras and antelopes, were unable to reach the lofty heights where Ginger could. However, Ginger consistently discovered her nourishment. She relished the fresh leaves and the tender buds of the trees, thriving in her elevated paradise."/>
+    <main className="w-screen min-h-screen overflow-x-hidden scroll-smooth">  
+        {impediments[0] === undefined || impediments[0].length === 0 ? (
+          <div className="flex-col flex justify-center items-center h-screen w-full">
+            <div className="mx-auto max-w-[1440px] px-6 pt-6 lg:pt-10 lg:px-8 relative">
+              <ImpedimentsOnboarding setImpediments={setImpediments} getImpediments={impediments} />
+            </div>
+          </div>
+        ) :
+          <div className="w-full h-full p-4 md:p-12 lg:p-24">
+            {cookies.get("impediments")}
+            <BooksList impediments={impediments} />
+          </div>
+        }
+
+      
     </main>
   );
 }
