@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import { useCookies } from "next-client-cookies"
 
 
 const listOfImpediments = [
@@ -28,7 +29,8 @@ const listOfImpediments = [
 
 
 
-export default function ImpedimentsOnboarding({ setImpediments }) {
+export default function ImpedimentsOnboarding({ setImpediments, getImpediments }) {
+  const cookies = useCookies();
 
   const [selectedImpediments, setSelectedImpediments] = useState({ 0: false, 1: false, 2: false, 3: false })
 
@@ -58,6 +60,7 @@ export default function ImpedimentsOnboarding({ setImpediments }) {
       {Object.values(selectedImpediments).includes(true) ? <button className="mt-4 w-full py-2 text-lg font-semibold text-center text-black bg-orange-500 dark:bg-orange-500 rounded-md hover:bg-orange-400 dark:hover:bg-orange-400 transition" 
         onClick={() => {
           setImpediments(Object.keys(selectedImpediments).filter((key) => selectedImpediments[key]).map((key) => listOfImpediments[key]))
+          cookies.set("impediments", [selectedImpediments[0], selectedImpediments[1], selectedImpediments[2], selectedImpediments[3]])
         }}
       >Next</button> : <div />}
 
