@@ -51,7 +51,7 @@ export default async function Page({ params }) {
                   book.story.map((story) => (
                     <div>
                       <p>{story.paragraph}</p>
-                      <img src={story.image} />
+                      <img src={'http://localhost:3000/' + story.image} />
                     </div>
                   ))
                 }
