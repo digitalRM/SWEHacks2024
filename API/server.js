@@ -3,6 +3,11 @@ const app = express();
 const cors = require('cors');
 const port = 3001;
 
+const OpenAI = require("openai");
+const openai = new OpenAI({
+    apiKey: "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"
+});
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -19,8 +24,28 @@ app.get('/api/pronounce', (req, res) => {
 });
 
 
-app.get('/api/rewrite', (req, res) => {
+app.post('/api/rewrite', async (req, res) => {
+    const { text } = req.body;
 
+    if (!text) {
+        return res.status(400).json({ error: 'No text provided for rewriting.' });
+    }
+
+    try {
+        const r = "r"
+        const completion = await openai.chat.completions.create({
+            messages: [{ role: "system", content: `Rewrite this paragraph to contain more words containing the letters ${r} without changing the context of the story while making it readable at an elementary level. Paragraph: ${text}` }],
+            model: "gpt-4-turbo",
+        });
+        
+        //console.log(completion.choices);
+        const rewrittenText = completion.choices[0].message.content.trim();
+
+        res.status(200).json({ rewritten: rewrittenText });
+    } catch (error) {
+        console.error('Error calling OpenAI API:', error);
+        res.status(500).json({ error: 'Failed to rewrite text due to server error.' });
+    }
 });
 
 
