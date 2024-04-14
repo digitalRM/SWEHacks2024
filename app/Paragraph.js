@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import WordPlayer from "./WordPlayer";
 import axios from 'axios';
+import { Volume2 } from 'lucide-react';
 
 const Paragraph = ({ text }) => {
     const [playing, setPlaying] = useState(false);
@@ -39,10 +40,10 @@ const Paragraph = ({ text }) => {
     };
 
     return (
-        <div>
+        <div className='mt-4 text-xl'>
             {renderText()}
-            <button onClick={handleTTS} disabled={playing} style={{"display":"block", "backgroundColor":"yellow"}}>
-                {playing ? "Playing..." : "Read Aloud"}
+            <button onClick={handleTTS} disabled={playing} style={{"display":"block"}} className='mt-4'>
+                {playing ? <Volume2 size={36} className='text-orange-500' /> : <Volume2 size={36} />}
             </button>
         </div>
     );

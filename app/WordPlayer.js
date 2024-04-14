@@ -23,7 +23,7 @@ function WordPlayer({ word }) {
 
     return (
         <div onClick={playAudio} style={{ cursor: 'pointer', "display":"inline" }}>
-            {word + " "} 
+            <span className="underline text-orange-950">{word}</span> {' '}
         </div>
     );
 }

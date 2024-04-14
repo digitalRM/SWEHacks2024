@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react';
+import Paragraph from '../../Paragraph';
 
 const listOfBooks = [
   {
@@ -35,7 +36,7 @@ async function callAPI(paragraph, setStory) {
   try {
     const res = await fetch('http://localhost:3001/api/rewrite', {
       method: 'POST',
-      body: JSON.stringify(paragraph),
+      body: JSON.stringify({"text": JSON.stringify(paragraph), "particles":[true, true, true, true]}),
       headers: {
         'Content-Type': 'application/json' 
       }
@@ -43,7 +44,8 @@ async function callAPI(paragraph, setStory) {
     console.log(res);
     if (res.ok) {
       const data = await res.json();
-      setStory((prev) => [...prev, data.rewritten]);
+      // add image from original paragraphs in the JSON
+      setStory((prev) => [...prev, data.rewritten ]);
     } else {
       console.log("Oops! Something is wrong.");
     }
@@ -60,7 +62,6 @@ export default function Page({ params }) {
     listOfBooks.forEach((book) => {
       if (book.titleEncoded === params.bookID) {
         book.story.forEach((array) => {
-          console.log(array.paragraph);
           callAPI({"text": array.paragraph}, setStory);
         });
       }
@@ -69,19 +70,23 @@ export default function Page({ params }) {
 
   return (
     <div>
-      <h1>Book Page</h1>
       {
         listOfBooks.map((book) => {
           if (book.titleEncoded === params.bookID) {
             return (
-              <div key={book.key}>
-                <h1>{book.title}</h1>
-                <p>{book.readTime}</p>
-                <img src={book.image} alt={book.title} />
-                <p>{book.desc}</p>
+              <div className=' max-w-[1440px] mx-auto' key={book.key}>
+                <div className='flex flex-row'>
+                  <div className='flex flex-col items-left mt-24'>
+                    <h1 className='text-4xl font-semibold tracking-tight'>{book.title}</h1>
+                    <p className='text-lg font-medium text'>{book.desc}</p>
+                    <p className='text-lg italic text-neutral-500'>{book.readTime}</p>
+                  </div>
+                  <img src={book.image} alt={book.title} className='mx-auto mt-12 mb-12' />
+                </div>
+
                 {
                   story.map((paragraph) => (
-                    <p>{paragraph}</p>
+                    <Paragraph text={paragraph} />
                   ))
                 }
               </div>
