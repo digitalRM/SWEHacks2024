@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Particle - University of Washington SWEHacks 2024 📙
 
-## Getting Started
+## By Derek Zhu, Ruslan Mukhamedvaleev, and Aruna Srivastava
+![SWEHacks 2024](https://github.com/digitalRM/SWEHacks2024/assets/70782025/475fd44f-9988-464c-a762-88cbebc8a6f7)
 
-First, run the development server:
+## The Track
+*We chose to compete in the Accessibility track by building a program designed to help children with speech impediments by making books easier to read. 18% of school-aged children with disabilities have speech impediments. Non-English speaking households are 50% less likely to receive speech therapy, and children in black communities are 48% less likely to be receiving speech services.* 
+
+
+
+- ### Inspiration
+We have seen young children who struggle with speech impediments and notice that its very difficult for lower income or busy families to access speech therapy tools and tutors.
+
+- ### What it does
+We built a online webapp that will help children with their speech impediments through easily digestible and engaging stories that allow children to practice challenging issues they encounter in their daily speaking. By using a finetuned LLM and various speech to text APIs we built a helpful and user friendly web-app to better engage and help kids with customizable stories and beautiful graphics. There are various tools built in to help them with hearing and speaking practice as well.
+
+- ### How we built it
+We build this application by using a multipart full-stack approach, making use of Next.js sleek and efficient paging ability and Express.js robust server components. We also made use of various speech and pronunciation APIs for extra features to help out with learning and made use of a finetuned LLM to generate engaging and interesting stories for elementary vocabularies.
+
+- ### Challenges we ran into
+We ran into issues revolving around API calls and server side rendering but we're happy to say we got past them and fixed many of the issues!
+
+- ### What's next for Particle
+We plan to continue working on this project, updating bits and pieces to help cover even more speech impediments along with more complex books and stories. Theres a whole world out there and we're super hyped to continue helping people improve their vocab and speech with software and AI tooling!
+![369shots_so](https://github.com/digitalRM/SWEHacks2024/assets/70782025/26beaac8-4f03-4a3e-8895-cf2b98bb26f2)
+# Running Locally
+
+To get a local copy up and running, follow these steps:
+
+### Prerequisites for Front End
+
+- npm
+- Node.js
+
+### Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/digitalRM/SWEHacks2024.git
+```
+
+Install required packages
+
+```bash
+npm install
+```
+
+Run the frontend server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Replace OpenAI API key with your own
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```js
+const openai = new OpenAI({
+    apiKey: ""
+});
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Run the backend server
 
-## Learn More
+```bash
+node API/server
+```
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Built With
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- NextJS - *` React.JS framework `*
+- ExpressJS - *` Back-end web framework `*
+- Tailwind CSS & UI - *` CSS framework and UI library `*
+- Lucide React - *` Icon Libray `*
+- OpenAI API - *` OpenAI API access with JS `*
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+
+
+
+
