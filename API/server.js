@@ -5,7 +5,7 @@ const port = 3001;
 
 const OpenAI = require("openai");
 const openai = new OpenAI({
-    apiKey: "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"
+    apiKey: "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"
 });
 
 app.use(cors());

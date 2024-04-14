@@ -28,7 +28,7 @@ export default function Home() {
           </div>
         ) :
           <div className="w-full h-full p-4 md:p-12 lg:p-24">
-            {cookies.get("impediments")}
+            {/* {cookies.get("impediments")} */}
             <BooksList impediments={impediments} />
           </div>
         }

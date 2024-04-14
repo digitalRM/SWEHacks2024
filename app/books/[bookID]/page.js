@@ -1,4 +1,5 @@
-'use server'
+'use client'
+import { useEffect, useState } from 'react';
 
 const listOfBooks = [
   {
@@ -30,10 +31,42 @@ const listOfBooks = [
   },
 ]
 
+async function callAPI(paragraph, setStory) {
+  try {
+    const res = await fetch('http://localhost:3001/api/rewrite', {
+      method: 'POST',
+      body: JSON.stringify(paragraph),
+      headers: {
+        'Content-Type': 'application/json' 
+      }
+    });
+    console.log(res);
+    if (res.ok) {
+      const data = await res.json();
+      setStory((prev) => [...prev, data.rewritten]);
+    } else {
+      console.log("Oops! Something is wrong.");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
+export default function Page({ params }) {
+  const [story, setStory] = useState([]);
 
-export default async function Page({ params }) {
-  
+  useEffect(() => {
+    console.log(params.bookID);
+    listOfBooks.forEach((book) => {
+      if (book.titleEncoded === params.bookID) {
+        book.story.forEach((array) => {
+          console.log(array.paragraph);
+          callAPI({"text": array.paragraph}, setStory);
+        });
+      }
+    });
+  }, []); 
+
   return (
     <div>
       <h1>Book Page</h1>
@@ -44,22 +77,19 @@ export default async function Page({ params }) {
               <div key={book.key}>
                 <h1>{book.title}</h1>
                 <p>{book.readTime}</p>
-                <img src={book.image} />
+                <img src={book.image} alt={book.title} />
                 <p>{book.desc}</p>
                 {
-
-                  book.story.map((story) => (
-                    <div>
-                      <p>{story.paragraph}</p>
-                      <img src={'http://localhost:3000/' + story.image} />
-                    </div>
+                  story.map((paragraph) => (
+                    <p>{paragraph}</p>
                   ))
                 }
               </div>
-            )
+            );
           }
+          return null;
         })
       }
     </div>
-  )
+  );
 }
