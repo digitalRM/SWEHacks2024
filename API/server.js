@@ -60,16 +60,18 @@ app.post('/api/tts', async (req, res) => {
 
 
 app.post('/api/rewrite', async (req, res) => {
-    const { text } = req.body;
+    const { text, particles } = req.body;
 
     if (!text) {
         return res.status(400).json({ error: 'No text provided for rewriting.' });
     }
 
+    const letters = `${particles[0]?"s":""}, ${particles[1]?"r":""}, ${particles[2]?"th":""}, ${particles[3]?"z":""}`
+
     try {
-        const r = "r"
+        
         const completion = await openai.chat.completions.create({
-            messages: [{ role: "system", content: `Rewrite this paragraph to contain more words containing the letters ${r} without changing the context of the story while making it readable at an elementary level. Paragraph: ${text}` }],
+            messages: [{ role: "system", content: `Rewrite this paragraph to contain more words containing the phonemes ${letters} without changing the context of the story while making it readable at an elementary level. Paragraph: ${text}` }],
             model: "gpt-4-turbo",
         });
         
