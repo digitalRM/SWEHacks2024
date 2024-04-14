@@ -106,7 +106,7 @@ export default function BooksList({ impediments }) {
       </div>
       <h1 className="text-4xl font-semibold tracking-tight mb-8 mt-16">All Books</h1>
       {/* <p className="text-lg text-neutral-600 italic mb-8">Targeting the following sounds: {impediments.map((impediment) => impediment.name).join(", ")}</p> */}
-      <div className="grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 mt-4">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
         {AllBooks.map((book) => (
           <div key={book.key}>
             <div className="flex flex-row justify-center h-64 p-8 bg-white dark:bg-neutral-800 border border-neutral-200 rounded-xl shadow-sm">
