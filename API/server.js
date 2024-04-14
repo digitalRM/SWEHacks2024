@@ -66,7 +66,7 @@ app.post('/api/rewrite', async (req, res) => {
         return res.status(400).json({ error: 'No text provided for rewriting.' });
     }
 
-    const letters = `${particles[0]?"s":""}, ${particles[1]?"r":""}, ${particles[2]?"th":""}, ${particles[3]?"z":""}`
+    const letters = `${particles[0]===true?"s, ":""}${particles[1]===true?"r, ":""}${particles[2]===true?"th, ":""}${particles[3]===true?"z":""}`
 
     try {
         
@@ -78,7 +78,7 @@ app.post('/api/rewrite', async (req, res) => {
         //console.log(completion.choices);
         const rewrittenText = completion.choices[0].message.content.trim();
 
-        res.status(200).json({ rewritten: rewrittenText });
+        res.status(200).json({ rewritten: rewrittenText, letters: letters });
     } catch (error) {
         console.error('Error calling OpenAI API:', error);
         res.status(500).json({ error: 'Failed to rewrite text due to server error.' });
