@@ -71,7 +71,7 @@ app.post('/api/rewrite', async (req, res) => {
     try {
         
         const completion = await openai.chat.completions.create({
-            messages: [{ role: "system", content: `Rewrite this paragraph to contain more words containing the letters ${letters} without changing the context of the story while making it readable at an elementary level. Paragraph: ${text}` }],
+            messages: [{ role: "system", content: `Rewrite this paragraph to contain more words containing the phonemes ${letters} without changing the context of the story while making it readable at an elementary level. Paragraph: ${text}` }],
             model: "gpt-4-turbo",
         });
         
