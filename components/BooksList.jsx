@@ -1,9 +1,11 @@
 import { Book } from "lucide-react"
+import Link from "next/link"
 
 
 const FeaturedBooks = [
   {
     title: 'Curious George & The Firefighters',
+    encodeURL: 'curious-george-and-the-firefighters',
     readTime: 'A 5 minute read',
     image: '/51ivdcJn6PL.jpg',
     desc: 'There is a fire! Can George help the firefighters and save the day?',
@@ -11,6 +13,7 @@ const FeaturedBooks = [
   },
   {
     title: 'Curious George & The Library',
+    encodeURL: 'curious-george-and-the-library',
     readTime: 'A 8 minute read',
     image: '/georgeLibrary.webp',
     desc: 'George loves books! Can he help the librarian and save the library?',
@@ -21,6 +24,7 @@ const FeaturedBooks = [
 const AllBooks = [
   {
     title: 'Curious George & The Firefighters',
+    encodeURL: 'curious-george-and-the-firefighters',
     readTime: 'A 5 minute read',
     image: '/51ivdcJn6PL.jpg',
     desc: 'There is a fire! Can George help the firefighters and save the day?',
@@ -28,6 +32,7 @@ const AllBooks = [
   },
   {
     title: 'Curious George & The Library',
+    encodeURL: 'curious-george-and-the-library',
     readTime: 'A 8 minute read',
     image: '/georgeLibrary.webp',
     desc: 'George loves books! Can he help the librarian and save the library?',
@@ -35,6 +40,7 @@ const AllBooks = [
   },
   {
     title: 'Curious George & The Bank',
+    encodeURL: 'curious-george-and-the-bank',
     readTime: 'A 10 minute read',
     image: '/georgeBank.webp',
     desc: 'George is curious about money! Can he help the bank and save the day?',
@@ -42,6 +48,7 @@ const AllBooks = [
   },
   {
     title: 'Curious George & The Hospital',
+    encodeURL: 'curious-george-and-the-hospital',
     readTime: 'A 7 minute read',
     image: '/georgeHospital.webp',
     desc: 'George is curious about doctors! Can he help the hospital and save the day?',
@@ -92,16 +99,18 @@ export default function BooksList({ impediments }) {
       {/* <p className="text-lg text-neutral-600 italic mb-8">Targeting the following sounds: {impediments.map((impediment) => impediment.name).join(", ")}</p> */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
         {FeaturedBooks.map((book) => (
-          <div key={book.key} className="flex flex-row ustify-center w-full h-full p-8 bg-white dark:bg-neutral-800 border border-neutral-200 rounded-xl shadow-sm">
-            <div className="w-full h-full justify-between flex flex-col">
-              <div>
-                <h2 className="text-2xl font-semibold my-2 mb-2 tracking-tight">{book.title}</h2>
-                <p className="text-lg text-neutral-600">{book.readTime}</p>
+          <Link href={`/books/${book.encodeURL}`} key={book.key}>
+            <div className="flex flex-row ustify-center w-full h-full p-8 bg-white dark:bg-neutral-800 border border-neutral-200 rounded-xl shadow-sm">
+              <div className="w-full h-full justify-between flex flex-col">
+                <div>
+                  <h2 className="text-2xl font-semibold my-2 mb-2 tracking-tight">{book.title}</h2>
+                  <p className="text-lg text-neutral-600">{book.readTime}</p>
+                </div>
+                <p className="text-lg mt-2">{book.desc}</p>
               </div>
-              <p className="text-lg mt-2">{book.desc}</p>
+              <img src={book.image} alt={book.title} className="w-1/2 object-contain rounded-md bg-center" />
             </div>
-            <img src={book.image} alt={book.title} className="w-1/2 object-contain rounded-md bg-center" />
-          </div>
+          </Link>
         ))}
       </div>
       <h1 className="text-4xl font-semibold tracking-tight mb-8 mt-16">All Books</h1>
