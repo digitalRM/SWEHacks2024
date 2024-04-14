@@ -1,6 +1,9 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const cors = require('cors');
+const fs = require('fs');
+
 const port = 3001;
 
 const OpenAI = require("openai");
@@ -22,6 +25,38 @@ app.get('/api/pronounce', (req, res) => {
         res.status(404).json({ error: 'File not found' });
     }
 });
+
+const publicDir = path.resolve("public");
+if (!fs.existsSync(publicDir)){
+    fs.mkdirSync(publicDir, { recursive: true });
+}
+
+app.use('/audio', express.static('public'));
+app.post('/api/tts', async (req, res) => {
+    
+    const { text } = req.body;
+    if (!text) {
+      return res.status(400).json({ error: 'No text provided' });
+    }
+  
+    const speechFile = path.resolve("public", `${Date.now()}.mp3`);
+  
+    try {
+      const response = await openai.audio.speech.create({
+        model: "tts-1",
+        voice: "nova",
+        input: text,
+      });
+  
+      const buffer = Buffer.from(await response.arrayBuffer());
+      await fs.promises.writeFile(speechFile, buffer);
+      const audioUrl = `${req.protocol}://${req.get('host')}/audio/${path.basename(speechFile)}`;
+      res.json({ audioUrl });
+    } catch (error) {
+      console.error('Failed to generate speech:', error);
+      res.status(500).json({ error: 'Failed to generate speech' });
+    }
+  });
 
 
 app.post('/api/rewrite', async (req, res) => {
