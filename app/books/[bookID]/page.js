@@ -32,7 +32,8 @@ const listOfBooks = [
   },
 ]
 
-async function callAPI(paragraph, setStory) {
+async function callAPI(content_, setStory) {
+  const paragraph = {"text": content_.paragraph}
   try {
     const res = await fetch('http://localhost:3001/api/rewrite', {
       method: 'POST',
@@ -45,7 +46,7 @@ async function callAPI(paragraph, setStory) {
     if (res.ok) {
       const data = await res.json();
       // add image from original paragraphs in the JSON
-      setStory((prev) => [...prev, data.rewritten ]);
+      setStory((prev) => [...prev, {"paragraph": data.rewritten, "image": content_.image}]);
     } else {
       console.log("Oops! Something is wrong.");
     }
@@ -61,8 +62,8 @@ export default function Page({ params }) {
     console.log(params.bookID);
     listOfBooks.forEach((book) => {
       if (book.titleEncoded === params.bookID) {
-        book.story.forEach((array) => {
-          callAPI({"text": array.paragraph}, setStory);
+        book.story.forEach((content_) => {
+          callAPI(content_ , setStory);
         });
       }
     });

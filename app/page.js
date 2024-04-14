@@ -8,16 +8,7 @@ import { useCookies } from 'next-client-cookies';
 
 export default function Home() {
   const cookies = useCookies();
-
-
-
-
   const [impediments, setImpediments] = useState([cookies.get("impediments")]);
-
-
-
-
-
   return (
     <main className="w-screen min-h-screen overflow-x-hidden scroll-smooth">  
         {impediments[0] === undefined || impediments[0].length === 0 ? (
